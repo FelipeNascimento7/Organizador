@@ -1099,13 +1099,14 @@
                     function contarPontos(task, primeiraChamada = false) {
                         const subtasks = task.subtasks;
                         if (subtasks.length === 0) {
-                            if (task.diasRestantesAtivo && task.viewed === false) {
-                                if (Number(task.diasRestantes) < 0){
+                            if (task.diasRestantesAtivo && task.viewed === false && task.diasRestantesAtivo == true) {
+                                if (Number(task.diasRestantes) < 0) {
                                     return Number(task.diasRestantes);
                                 }
-                                if (Number(task.diasRestantes) === 0){
+                                if (Number(task.diasRestantes) === 0) {
                                     return -1;
                                 }
+                                return 0;
                             } else {
                                 return 0;
                             }
