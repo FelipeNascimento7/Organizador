@@ -63,6 +63,10 @@
             flex-direction: column;
         }
 
+        b {
+            font-weight: bold;
+        }
+
         header {
             display: flex;
             flex-direction: column;
@@ -74,8 +78,12 @@
 
         header h1 {
             margin: 0;
-            ;
         }
+
+        .container-opcoes-instrucoes h2 {
+            font-size: 25px;
+            margin-bottom: var(--base-margin);
+        } 
 
         .tempo-restante {
             margin: 0;
@@ -110,6 +118,21 @@
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+            align-items: center;
+            margin-bottom: var(--base-margin);
+            padding: 1rem;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 4px;
+            font-size: 0.7rem;
+        }
+
+        .container-opcoes-instrucoes {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             margin-bottom: var(--base-margin);
             padding: 1rem;
@@ -631,16 +654,11 @@
 
     <div id="blocosContainer" class="content">
 
-        <!--div class="action-buttons">
-            <div id="backButtonContainer"></div>
-            <button id="uncheckAllBtn" class="action-btn">Desmarcar Tudo</button>
-        </div-->
-
         <div id="breadcrumb" class="breadcrumb"></div>
 
 
         <div class="add-task-container" id="addTaskContainer">
-            <input type="text" class="add-task-input" placeholder="Adicione uma nova tarefa..." id="taskInput">
+            <input type="text" class="add-task-input" placeholder="Adicione um bloco ou comentário..." id="taskInput">
             <button class="add-task-btn displayBlock" id="addTaskBtn">Adicionar Bloco</button>
             <button class="add-task-btn displayNone" id="addCommentBtn">Adicionar Comentário</button>
         </div>
@@ -680,6 +698,22 @@
             <button onclick="openFileSelector()">Importar</button>
             <button onclick="exportTasksToCSV()">Exportar</button>
             <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+        </div>
+
+        <div class="container-opcoes-instrucoes">
+            <h2>Instruções</h2>
+            <div>
+                <p>01. Clique em "Adicionar Bloco" com a <b>caixa de texto vazia</b> para alternar entre adicionar bloco ou comentário.</p>
+                <p>02. Clique em um bloco para abri-lo e adicionar um bloco do bloco.</p>
+                <p>03. Os blocos dos blocos possuem a opção de dias restantes para concluir.</p>
+                <p>04. Se o dia restante for 0 significa que foi agendado para hoje.</p>
+                <p>05. Os blocos da página inicial contam quantas tarefas estão agendadas para hoje + as atrasadas.</p>
+                <p>06. Na aba "HOJE" você pode decidir quais tarefas estão agendadas para hoje + as atrasadas que serão realizadas hoje.</p>
+                <p>07. Clicando na aba "HOJE" pela segunda vez abre a aba "ORDEM" com as tarefas que foram selecionadas para hoje.</p>
+                <p>08. Você pode clicar no botão reordenar e escolher o número da posição que deseja para a tarefa.</p>
+                <p>09. Ao atualizar as tarefas, todas as tarefas com dias restantes serão subtraídas em 1 dia e todas as tarefas perderão o check.</p>
+                <p>10. A cada novo dia as tarefas são atualizadas automaticamente.</p>
+            </div>
         </div>
 
 
