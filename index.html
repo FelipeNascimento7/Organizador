@@ -1100,10 +1100,11 @@
                         const subtasks = task.subtasks;
                         if (subtasks.length === 0) {
                             if (task.diasRestantesAtivo && task.viewed === false) {
+                                if (Number(task.diasRestantes) < 0){
+                                    return Number(task.diasRestantes);
+                                }
                                 if (Number(task.diasRestantes) === 0){
                                     return -1;
-                                }else{
-                                    return Number(task.diasRestantes);
                                 }
                             } else {
                                 return 0;
