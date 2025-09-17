@@ -924,12 +924,10 @@
             const emptyState = document.getElementById('emptyState');
             const breadcrumb = document.getElementById('breadcrumb');
             const title = document.getElementById('title');
-            //const backButtonContainer = document.getElementById('backButtonContainer');
             const blocosContainer = document.getElementById('blocosContainer');
             const hojeContainer = document.getElementById('hojeContainer');
             const opcoesContainer = document.getElementById('opcoesContainer');
             const addTaskContainer = document.getElementById('addTaskContainer');
-            //const uncheckAllBtn = document.getElementById('uncheckAllBtn');
             const emptyStateHoje = document.getElementById('emptyState-hoje');
             const tasksContainerHoje = document.getElementById('tasksContainer-hoje');
             const popup = document.getElementById('popup');
@@ -943,10 +941,6 @@
 
             btnSalvarComentario.addEventListener('click', salvarComentario);
             btnCancelarComentario.addEventListener('click', fecharPopup);
-
-
-            // Adiciona o evento de clique ao botão Desmarcar Tudo
-            //uncheckAllBtn.addEventListener('click', atualziarTasks);
 
             // Estado da navegação
             let navigationStack = [];
@@ -1001,10 +995,6 @@
                     }
                 });
             });
-
-            // Renderiza as tarefas principais inicialmente
-            //renderTasks(tasks, 'Tarefas Principais');
-            //renderHoje(tasks, 'Hoje');
 
             // Adiciona nova tarefa
             addTaskBtn.addEventListener('click', addTask);
@@ -1537,28 +1527,20 @@
                 taskItem.appendChild(taskContent);
                 taskItem.appendChild(taskActions);
 
-                // Initialize viewed status if it doesn't exist
                 if (task.viewed === undefined) {
                     task.viewed = false;
                 }
 
                 taskItem.addEventListener('click', (e) => {
                     if (e.target !== deleteBtn && !deleteBtn.contains(e.target) && !taskCheckbox.contains(e.target)) {
-                        // Mark task as viewed when clicked
+          
                         if (task.diasRestantesAtivo === false) {
                             task.viewed = true;
                         }
 
-                        // If this is a parent task with subtasks, mark all subtasks as viewed
-                        /*if (task.subtasks && task.subtasks.length > 0) {
-                            task.subtasks.forEach(subtask => {
-                                subtask.viewed = true;
-                            });
-                        }*/
-
                         navigationStack.push({ id: task.id, text: task.text });
                         renderTasks(task.subtasks, task.text, task.id);
-                        saveTasks(); // Save the viewed status
+                        saveTasks();
                     }
                     if (e.target === taskCheckbox) {
                         task.viewed = !task.viewed;
@@ -1566,23 +1548,13 @@
                     }
                 });
 
-                // Create a checkbox that indicates if the task has been viewed
                 const taskCheckbox = document.createElement('input');
                 taskCheckbox.type = 'checkbox';
                 taskCheckbox.className = 'task-checkbox';
                 taskCheckbox.style.marginRight = '10px';
-                //taskCheckbox.style.cursor = 'default'; // Impede que o cursor mude para pointer
-                //taskCheckbox.style.pointerEvents = 'none'; // Impede interação do usuário
+               
+                taskCheckbox.checked = task.viewed
 
-                /*// Check if task has been viewed or all subtasks have been viewed
-                const allSubtasksViewed = task.subtasks && task.subtasks.length > 0
-                    ? task.subtasks.every(subtask => subtask.viewed === true)
-                    : false;*/
-
-                // Check the checkbox if task has been viewed or all subtasks have been viewed
-                taskCheckbox.checked = task.viewed /*|| allSubtasksViewed);*/
-
-                // Add some styling to the checkbox
                 taskCheckbox.style.width = '16px';
                 taskCheckbox.style.height = '16px';
                 taskCheckbox.style.accentColor = '#4aa56b';
@@ -1595,9 +1567,7 @@
             function reordenarTarefa(id, novaPosicao) {
                 const task = tasksOrdenadas.find(task => task.id === id);
                 if (!task) return;
-                /*if (novaPosicao > tasksOrdenadas.length) {
-                    novaPosicao = tasksOrdenadas.length;
-                }*/
+
                 const index = tasksOrdenadas.indexOf(task);
                 if (index >= 0) {
                     tasksOrdenadas.splice(index, 1);
